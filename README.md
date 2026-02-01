@@ -61,6 +61,18 @@ Steps:
 6) Summarize how to run `make dev` and test with a sample CR
 ```
 
+## Quick prompt (short test)
+```
+Follow AGENTS.md. Build a “CachePolicy” CRD with:
+- spec: cacheName (string, required), ttlSeconds (int, required)
+- status: phase (Pending/Active/Expired), lastRefreshTime (timestamp)
+- validating webhook: ttlSeconds >= 30
+- mutating webhook: default ttlSeconds = 300
+- namespace-scoped RBAC
+- dev-only, kind-only
+Generate CRD, controller, webhook, dev overlay, and Tiltfile. Deploy to kind and verify.
+```
+
 ## Helper scripts
 - `make kind` creates a kind cluster
 - `make deploy` applies the Kustomize dev overlay
