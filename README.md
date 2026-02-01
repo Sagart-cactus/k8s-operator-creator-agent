@@ -22,6 +22,45 @@ This repo turns Kubernetes operator development into a **guided, high‑speed wo
 4) Follow the prompts — the agent builds + deploys  
 5) Keep the loop hot with `make dev`
 
+## Sample agent prompt (copy/paste)
+```
+You are the CRD/Webhook Builder agent for this repo. Follow AGENTS.md strictly.
+
+Goal: build a “TTLJob” CRD that runs a Job and auto-deletes it after a TTL.
+
+Requirements:
+- CRD: TTLJob with spec fields:
+  - image (string, required)
+  - command ([]string, optional)
+  - ttlSeconds (int, required)
+  - backoffLimit (int, optional, default 3)
+  - labels (map[string]string, optional)
+- Status fields:
+  - phase (string: Pending/Running/Succeeded/Failed)
+  - startTime (timestamp)
+  - completionTime (timestamp)
+  - jobName (string)
+- Validating webhook:
+  - ttlSeconds must be >= 60
+  - image must be non-empty
+  - backoffLimit must be 0..10
+- Mutating webhook:
+  - default backoffLimit to 3
+  - default ttlSeconds to 3600 if not set
+- RBAC: namespace-scoped
+- Safety: only mutate CRs labeled “dev-mode=true”
+- Fast dev loop: use Tilt + local compile + binary sync + restart
+- Use kubebuilder + kustomize conventions
+
+Steps:
+1) Ask any missing questions (only if needed)
+2) Generate CRD schema, controller logic, webhook scaffolding
+3) Add Tiltfile, dev overlay, and Make targets
+4) Create kind cluster and deploy
+5) Verify with MCP if available, otherwise kubectl
+6) Summarize how to run `make dev` and test with a sample CR
+```
+
 ## Helper scripts
 - `make kind` creates a kind cluster
 - `make deploy` applies the Kustomize dev overlay
