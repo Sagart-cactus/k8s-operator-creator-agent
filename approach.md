@@ -1,6 +1,6 @@
 # Building CRD Operators Faster with Tilt + AI Agents: A Practical Feedback Loop
 
-Kubernetes CRD operators and webhooks are powerful, but the development loop is notoriously slow. You write Go code, rebuild the image, load it into a cluster, deploy manifests, test, repeat. That friction is the biggest reason DevOps engineers avoid writing operators or webhooks themselves—even when they know it would solve real problems.
+Kubernetes CRD operators and webhooks are powerful, but the development loop is slow. You write Go code, rebuild the image, load it into a cluster, deploy manifests, test, repeat. That friction is a big reason DevOps engineers skip writing operators or webhooks, even when they know it would solve real problems.
 
 ## Why Tilt Matters for CRDs and Webhooks
 
@@ -17,9 +17,9 @@ This is the fastest loop you can get without shifting the operator entirely to a
 
 ## Why AI Agents Usually Miss This
 
-Most AI agents that generate Kubernetes code stop at scaffolding. They can write a CRD schema, generate controller logic, and produce YAML—but they don’t integrate a developer feedback loop. The result is “code that exists” rather than “code you can iterate on quickly.”
+Most AI agents that generate Kubernetes code stop at scaffolding. They can write a CRD schema, generate controller logic, and produce YAML, but they don’t integrate a developer feedback loop. The result is “code that exists” rather than “code you can iterate on quickly.”
 
-That gap matters because **operators require iteration**. The first pass is almost always wrong: schema needs tweaks, webhook invariants need correction, RBAC is too broad, or reconcile logic misses edge cases. Without a fast loop, every fix is expensive—and agents aren’t incentivized to optimize the human‑in‑the‑loop experience.
+That gap matters because **operators require iteration**. The first pass is almost always wrong: schema needs tweaks, webhook invariants need correction, RBAC is too broad, or reconcile logic misses edge cases. Without a fast loop, every fix is expensive, and agents aren’t incentivized to optimize the human-in-the-loop experience.
 
 ## Why Fast, Reliable Feedback Is Essential for Agents
 
@@ -43,7 +43,7 @@ This project is an agent‑first workspace that bakes the feedback loop into the
 - kind for dev‑only cluster safety
 - Optional MCP validation or kubectl verification
 
-The agent:
+The agent does a few things in order:
 
 1) asks for CRD purpose, fields, validations, webhook type
 2) generates code and manifests
@@ -102,7 +102,7 @@ Steps:
 
 ## Closing Thoughts
 
-Tilt is not just a developer convenience—it’s a critical piece of the reliability story for AI agents. When an agent can test, observe, and iterate rapidly, its outputs improve dramatically. That’s exactly what this repo tries to enable: a fast, safe, and repeatable loop for CRD operators and webhooks.
+Tilt is not just a developer convenience, it’s a critical piece of the reliability story for AI agents. When an agent can test, observe, and iterate rapidly, its outputs improve dramatically. That’s exactly what this repo tries to enable: a fast, safe, and repeatable loop for CRD operators and webhooks.
 
 If you build with CRDs or work in DevOps, I’d love feedback.
 
